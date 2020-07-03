@@ -12,7 +12,8 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
 
 # Airflow
-ARG AIRFLOW_VERSION=1.10.9
+# ARG AIRFLOW_VERSION=1.10.9
+ARG AIRFLOW_VERSION=1.10.10
 ARG AIRFLOW_USER_HOME=/usr/local/airflow
 ARG AIRFLOW_DEPS=""
 ARG PYTHON_DEPS=""
@@ -80,7 +81,11 @@ RUN chown -R airflow: ${AIRFLOW_USER_HOME}
 
 EXPOSE 8080 5555 8793
 
+RUN sed -i '268s/l/output/' /usr/local/lib/python3.7/site-packages/airflow/operators/docker_operator.py
+RUN sed -i '269s/output/#output/' /usr/local/lib/python3.7/site-packages/airflow/operators/docker_operator.py
+
 USER airflow
 WORKDIR ${AIRFLOW_USER_HOME}
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["webserver"]
+

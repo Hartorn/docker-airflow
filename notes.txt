@@ -1,0 +1,16 @@
+docker-py 1.10.6
+
+docker build --rm --build-arg PYTHON_DEPS="docker-py==1.10.6" -t puckel/docker-airflow .
+ docker 4.2.2 
+docker build --rm --build-arg PYTHON_DEPS="docker==4.2.2" -t puckel/docker-airflow .
+
+https://hub.docker.com/_/docker
+
+
+docker-compose -f docker-compose-CeleryExecutor.yml stop rm up -d
+
+docker-compose -f docker-compose-CeleryExecutor.yml up -d
+
+
+# https://github.com/puckel/docker-airflow/issues/535
+https://github.com/apache/airflow/pull/7628#issuecomment-616861581
